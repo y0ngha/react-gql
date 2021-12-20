@@ -1,0 +1,53 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+"This directive allows results to be deferred during execution"
+directive @defer on FIELD
+
+type Comment {
+    body: String!
+    email: String!
+    id: Int!
+    name: String!
+    postId: Int!
+}
+
+type Mutation {
+    deleteCommentById(id: Int): Boolean
+    deleteCommentByPostId(postId: Int!): Boolean
+    deletePostById(id: Int!): Boolean
+    insertComment(comment: IComment!, postId: Int!): Boolean
+    insertPost(post: IPost!): Boolean
+    insertPostAfterView(post: IPost!): Post
+}
+
+type Post {
+    body: String!
+    id: Int!
+    title: String!
+    userId: Int!
+}
+
+"Root Query"
+type Query {
+    getComment: [Comment]
+    getCommentByPostId(postId: Int!): [Comment]
+    getPost: [Post]
+    getPostById(id: Int!): Post
+}
+
+input IComment {
+    body: String!
+    email: String!
+    name: String!
+}
+
+input IPost {
+    body: String!
+    title: String!
+    userId: Int!
+}
